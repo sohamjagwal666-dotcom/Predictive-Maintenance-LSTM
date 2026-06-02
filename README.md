@@ -148,14 +148,13 @@ The model successfully learned degradation patterns from sensor data and achieve
 
 ## Requirements
 
-```text
-numpy
-pandas
-scikit-learn
-matplotlib
-torch
-```
-
+- Python 3.9+
+- NumPy
+- Pandas
+- Scikit-Learn
+- PyTorch
+- Matplotlib
+- Jupyter Notebook
 ---
 
 ## Future Improvements
