@@ -1,48 +1,175 @@
 # Predictive Maintenance of Turbofan Engines using LSTM
 
-This project predicts the Remaining Useful Life (RUL) of aircraft turbofan engines using the NASA C-MAPSS FD001 dataset. An LSTM-based deep learning model was trained on multivariate time-series sensor data to learn degradation patterns and estimate the number of cycles remaining before engine failure.
+## Overview
 
-Dataset used: NASA C-MAPSS Turbofan Engine Degradation Simulation Dataset (FD001)
-Source: NASA Prognostics Center of Excellence
-Subset Used: FD001
-Description: Multivariate time-series sensor data for turbofan engines used for Remaining Useful Life (RUL) prediction.
+This project predicts the **Remaining Useful Life (RUL)** of aircraft turbofan engines using the NASA C-MAPSS FD001 dataset. A Long Short-Term Memory (LSTM) neural network was trained on multivariate time-series sensor data to learn engine degradation patterns and estimate the number of operational cycles remaining before engine failure.
 
-Train trajectories: 100
-Test trajectories: 100
-Conditions: ONE (Sea Level)
-Fault Modes: ONE (HPC Degradation)
+---
 
+## Problem Statement
 
-Experimental Scenario
+Unexpected engine failures can lead to increased maintenance costs, operational downtime, and safety risks. Traditional maintenance strategies often rely on fixed schedules, which may result in either premature maintenance or delayed fault detection.
 
-Data sets consists of multiple multivariate time series. Each data set is further divided into training and test subsets. Each time series is from a different engine – i.e., the data can be considered to be from a fleet of engines of the same type. Each engine starts with different degrees of initial wear and manufacturing variation which is unknown to the user. This wear and variation is considered normal, i.e., it is not considered a fault condition. There are three operational settings that have a substantial effect on engine performance. These settings are also included in the data. The data is contaminated with sensor noise.
+The objective of this project is to develop a predictive maintenance system capable of estimating the Remaining Useful Life (RUL) of turbofan engines using historical sensor measurements. Accurate RUL prediction enables condition-based maintenance and helps prevent unexpected failures.
 
-The engine is operating normally at the start of each time series, and develops a fault at some point during the series. In the training set, the fault grows in magnitude until system failure. In the test set, the time series ends some time prior to system failure. The objective of the competition is to predict the number of remaining operational cycles before failure in the test set, i.e., the number of operational cycles after the last cycle that the engine will continue to operate. Also provided a vector of true Remaining Useful Life (RUL) values for the test data.
+---
 
-Methodology:-
+## Dataset
+
+**Dataset:** NASA C-MAPSS Turbofan Engine Degradation Simulation Dataset
+
+**Source:** NASA Prognostics Center of Excellence
+
+**Subset Used:** FD001
+
+### Dataset Characteristics
+
+* Train Trajectories: 100 Engines
+* Test Trajectories: 100 Engines
+* Operating Conditions: Single (Sea Level)
+* Fault Mode: High Pressure Compressor (HPC) Degradation
+
+The dataset consists of multivariate time-series sensor measurements recorded throughout the operational life of multiple engines. Each engine begins with different initial wear conditions and gradually develops degradation until failure.
+
+The training dataset contains complete run-to-failure trajectories, while the test dataset contains truncated trajectories along with true Remaining Useful Life (RUL) values.
+
+---
+
+## Experimental Scenario
+
+Each engine operates normally at the beginning of its life cycle and gradually develops a fault. In the training set, degradation continues until engine failure. In the test set, engine trajectories are stopped before failure occurs.
+
+The goal is to predict the number of cycles remaining before failure using sensor measurements collected during engine operation.
+
+---
+
+## Data Preprocessing
+
+The following preprocessing steps were performed:
+
+1. Data Loading and Exploration
+
+2. Missing Value Check
+
+3. Removal of Zero Variance Features
+
+4. RUL Computation using:
+
+   RUL = Maximum Cycle − Current Cycle
+
+5. Feature Selection
+
+6. Feature Normalization using StandardScaler
+
+7. Sliding Window Sequence Generation
+
+8. Sequence Padding for Short Test Sequences
+
+---
+
+## Sequence Generation
+
+* Sequence Length: 30 Cycles
+* Sliding Window Technique Used
+* Approximately 17,000 overlapping training sequences generated
+
+### Training Data
+
+For each engine, overlapping sequences of 30 consecutive cycles were generated. The target label for each sequence was the RUL corresponding to the last cycle in the sequence.
+
+### Test Data
+
+For each engine, only the final 30 cycles were used for prediction. Engines with fewer than 30 cycles were padded with zeros.
+
+---
+
+## Model Architecture
+
+The project uses a Long Short-Term Memory (LSTM) neural network implemented in PyTorch.
+
+### Why LSTM?
+
+LSTM networks are specifically designed for sequential and time-series data. They can capture long-term temporal dependencies and degradation trends present in engine sensor measurements.
+
+### Components
+
+* LSTM Layer
+* Fully Connected Output Layer
+* Mean Squared Error (MSE) Loss
+* Adam Optimizer
+
+---
+
+## Technologies Used
+
+* Python
+* PyTorch
+* NumPy
+* Pandas
+* Scikit-Learn
+* Matplotlib
+* Machine Learning
+* Deep Learning
+* LSTM Networks
+* Time-Series Analysis
+
+---
+
+## Methodology
+
 1. Data Loading
 2. Data Cleaning
 3. RUL Computation
 4. Feature Selection
-5. Normalization
+5. Data Normalization
 6. Sequence Generation
-7. LSTM Training
-8. Evaluation
+7. LSTM Model Training
+8. Performance Evaluation
 
-Technologies Used:-
-1.Python
-2.PyTorch
-3.NumPy
-4.Pandas
-5.Machine Learning
-6.Deep Learning
-7.LSTM
+---
 
-Results:-
-RMSE: 13.364
-MAE : 9.882
-R²  : 0.8898
+## Results
+
+| Metric   | Value  |
+| -------- | ------ |
+| RMSE     | 13.364 |
+| MAE      | 9.882  |
+| R² Score | 0.8898 |
 
 The model successfully learned degradation patterns from sensor data and achieved strong predictive performance on unseen test engines.
 
-![prediction results](images/final_results.png)
+---
+
+## Prediction Results
+
+![Prediction Results](images/final_results.png)
+
+---
+
+## Requirements
+
+```text
+numpy
+pandas
+scikit-learn
+matplotlib
+torch
+```
+
+---
+
+## Future Improvements
+
+* Hyperparameter Optimization
+* Attention-Based Models
+* GRU and Transformer Comparisons
+* Multi-Fault Prediction using FD002, FD003 and FD004 datasets
+* Real-Time Predictive Maintenance Deployment
+
+---
+
+## Author
+
+Soham Kumar
+
+B.Tech Computer Science Engineering
