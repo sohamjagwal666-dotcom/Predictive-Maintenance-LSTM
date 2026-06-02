@@ -44,4 +44,5 @@ MAE : 9.882
 R²  : 0.8898
 
 The model successfully learned degradation patterns from sensor data and achieved strong predictive performance on unseen test engines.
+
 ![prediction results](images/final_results.png)
