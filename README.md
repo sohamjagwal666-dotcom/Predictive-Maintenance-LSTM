@@ -155,11 +155,12 @@ The model successfully learned degradation patterns from sensor data and achieve
 - PyTorch
 - Matplotlib
 - Jupyter Notebook
----
-Install packages using
+
+Install dependencies using
 ```
 pip install -r requirements.txt
 ```
+---
 ## Future Improvements
 
 * Hyperparameter Optimization
