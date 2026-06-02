@@ -156,7 +156,10 @@ The model successfully learned degradation patterns from sensor data and achieve
 - Matplotlib
 - Jupyter Notebook
 ---
-
+Install packages using
+```
+pip install -r requirements.txt
+```
 ## Future Improvements
 
 * Hyperparameter Optimization
