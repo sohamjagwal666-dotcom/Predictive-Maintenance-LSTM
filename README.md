@@ -161,10 +161,7 @@ torch
 ## Future Improvements
 
 * Hyperparameter Optimization
-* Attention-Based Models
-* GRU and Transformer Comparisons
 * Multi-Fault Prediction using FD002, FD003 and FD004 datasets
-* Real-Time Predictive Maintenance Deployment
 
 ---
 
@@ -172,4 +169,4 @@ torch
 
 Soham Kumar
 
-B.Tech Computer Science Engineering
+B.Tech Computer Engineering
